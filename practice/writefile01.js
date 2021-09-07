@@ -6,7 +6,9 @@ const data={
     age:28
 };
 
-fs.writeFile('data.json',JSON.stringify(data,null,4),
+fs.writeFile(
+    'data.json',
+    JSON.stringify(data,null,4),
 error=>{
     if(error){
         console.log('無法寫入',error);
