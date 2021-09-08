@@ -2,6 +2,8 @@ require('dotenv').config(); //載入 .env的設定
 const express = require('express');
 const app = express();
 
+app.set('view engine','ejs');
+
 app.use('/', express.static('public'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
@@ -9,7 +11,8 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 // *** 路由定義開始
 app.get('/', function (req, res) {
-    res.send('Hello World')
+    res.render('home',{name: 'JYO'});
+    //res.send('Hello World')
 });
 // *** 路由定義結束
 
