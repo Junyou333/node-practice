@@ -1,1 +1,10 @@
-<h2>Hi, <%= name %></h2>
+<%- include('parts/html-head.ejs') %>
+    <%- include('parts/navbar.ejs') %>
+
+        <div class="container">
+            <h2>Hi, <%= name %>
+            </h2>
+        </div>
+
+        <%- include('parts/scripts.ejs') %>
+            <%- include('parts/html-foot.ejs') %>
