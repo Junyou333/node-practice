@@ -2,7 +2,7 @@ require('dotenv').config(); //載入 .env的設定
 const express = require('express');
 const app = express();
 
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
 app.use('/', express.static('public'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
@@ -11,8 +11,16 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 // *** 路由定義開始
 app.get('/', function (req, res) {
-    res.render('home',{name: 'JYO'});
+    res.render('home', { name: 'JYO' });
     //res.send('Hello World')
+});
+app.get('/json-sales', function (req, res) {
+    const sales = require('./data/sales');
+
+    // console.log(sales);
+    // res.send(sales);
+    //res.json(sales);
+    res.render('json-sales',{sales});
 });
 // *** 路由定義結束
 
