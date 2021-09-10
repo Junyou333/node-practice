@@ -4,6 +4,10 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+//middleware 中介函式 解析urlencoded格式
+
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use('/', express.static('public'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
@@ -21,6 +25,16 @@ app.get('/json-sales', function (req, res) {
     // res.send(sales);
     //res.json(sales);
     res.render('json-sales',{sales});
+});
+
+//測試querystring
+app.get('/try-qs', function (req, res) {
+    res.json(req.query);
+});
+
+
+app.post('/try-post',function (req, res) {
+    res.json(req.body);
 });
 // *** 路由定義結束
 
