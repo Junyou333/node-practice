@@ -1,0 +1,32 @@
+<%- include('parts/html-head.ejs') %>
+  <%- include('parts/navbar.ejs') %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <form method="post">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email">
+              <% if(typeof email !=='undefined' ){ %>
+                <div class="form-text">上次輸入:<%= email %>
+                </div>
+                <% } %>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+              <% if(locals.password){ %>
+                <div class="form-text">上次輸入:<%= password %>
+                </div>
+                <% } %>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('parts/scripts.ejs') %>
+      <%- include('parts/html-foot.ejs') %>
