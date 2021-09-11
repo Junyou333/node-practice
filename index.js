@@ -6,7 +6,7 @@ app.set('view engine', 'ejs');
 
 //middleware 中介函式 解析urlencoded格式
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/', express.static('public'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
@@ -24,7 +24,7 @@ app.get('/json-sales', function (req, res) {
     // console.log(sales);
     // res.send(sales);
     //res.json(sales);
-    res.render('json-sales',{sales});
+    res.render('json-sales', { sales });
 });
 
 //測試querystring
@@ -33,9 +33,19 @@ app.get('/try-qs', function (req, res) {
 });
 
 
-app.post('/try-post',function (req, res) {
+app.post('/try-post', function (req, res) {
     res.json(req.body);
 });
+app.get('/try-post-form', (req, res) => {
+    res.render('try-post-form');
+});
+app.post('/try-post-form', (req, res) => {
+    res.render('try-post-form', req.body);
+});
+app.get('/pending', (req, res) => {
+
+});
+
 // *** 路由定義結束
 
 //需放在所有路由之後
