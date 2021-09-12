@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myPromise(p) {
+            return new Promise((resolve, reject) => {
+                const rnd = 300 + Math.floor(Math.random() * 1000);
+                setTimeout(() => {
+                    resolve({ p, rnd });
+                }, rnd);
+            });
+        }
+
+        async function func() {
+            const r1 = await myPromise('Bill');
+            console.log(r1);
+            const r2 = await myPromise('Ryan');
+            console.log(r2);
+            const r3 = await myPromise('Carter');
+            console.log(r3);
+            const r4 = await myPromise('Sam');
+            console.log(r4);
+        }
+
+        func();
+        console.log('end');
+
+        // myPromise('bill')
+        //     .then(r => {
+        //         console.log(r);
+        //         return myPromise('Peter');
+        //     })
+        //     .then(r => {
+        //         console.log(r);
+        //         return myPromise('david');
+        //     })
+        //     .then(r => {
+        //         console.log(r);
+        //         return myPromise('alen');
+        //     })
+        //     .then(r => {
+        //         console.log(r);
+        //     })
+
+
+
+
+    </script>
+</body>
+
+</html>

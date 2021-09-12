@@ -1,5 +1,8 @@
 require('dotenv').config(); //載入 .env的設定
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'tmp_uploads/' });
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -43,7 +46,11 @@ app.post('/try-post-form', (req, res) => {
     res.render('try-post-form', req.body);
 });
 app.get('/pending', (req, res) => {
+});
 
+app.post('/try-upload', upload.single('avatar'), (req, res) => {
+    res.json(req.file);
+    //console.log(req.file);
 });
 
 // *** 路由定義結束
