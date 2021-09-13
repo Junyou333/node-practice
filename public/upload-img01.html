@@ -32,7 +32,17 @@
 
 
     <script>
-const avatar = document.querySelector('#avatar');
+        const avatar = document.querySelector('#avatar');
+        avatar.addEventListener('change', async event => {
+            const fd = new FormData(document.form1);
+            const res = await fetch('/try-upload2', {
+                method: 'POST',
+                body: fd
+            });
+            const obj = await res.json();
+            document.querySelector('#img01').src = '/img/' + obj.filename;
+            document.fake_form.my_img.value = obj.filename;
+        });
 
     </script>
 
