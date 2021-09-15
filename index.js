@@ -2,12 +2,23 @@ require('dotenv').config(); //載入 .env的設定
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs').promises;
+const session = require('express-session');
 const upload = multer({ dest: 'tmp_uploads/' });
 const uploadImg = require('./modules/upload-image');
 
 const app = express();
 
 app.set('view engine', 'ejs');
+
+app.use(session({
+    name: 'mySessionId',
+    saveUninitialized: false,
+    resave: false,
+    secret: 'gfddfhnjtrktykt75742hklug',
+    cookie: {
+        maxAge: 1200000,
+    }
+}));
 
 //middleware 中介函式 解析urlencoded格式
 
@@ -18,8 +29,16 @@ app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 
+app.use((req, res, next) => {
+    res.locals.title = '小新的網站';
+
+
+    next();
+});
+
 // *** 路由定義開始
 app.get('/', function (req, res) {
+    res.locals.title = '首頁 - ' + res.locals.title;
     res.render('home', { name: 'JYO' });
     //res.send('Hello World')
 });
@@ -70,10 +89,27 @@ app.post('/try-upload2', uploadImg.single('avatar'), async (req, res) => {
 app.post('/try-upload3', uploadImg.array('photo', 10), async (req, res) => {
     res.json(req.files);
 });
-app.get('/my-params1/:action?/:id?', (req, res) => {
+app.get('/my-params1/:action?/:id(\\d+)?', (req, res) => {
     res.json(req.params);
 });
+//phone num
+app.get(/^\/m\/09\d{2}-?\d{3}-?\d{3}$/i, (req, res) => {
+    let u = req.url.split('?')[0];
+    u = u.slice(3);
+    u = u.split('-').join('');
 
+    res.json(req.url);
+});
+
+app.use(require('./routes/admin2'));
+app.use('/admin3', require('./routes/admin3'));
+
+app.get('/try-sess', (req, res) => {
+    req.session.myVar = req.session.myVar || 0;
+    req.session.myVar++;
+
+    res.json(req.session);
+});
 
 // *** 路由定義結束
 

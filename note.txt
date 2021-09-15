@@ -1,0 +1,13 @@
+req.headers
+req.get()
+
+req.query
+req.body
+req.params
+req.files
+-----------
+res.end()
+res.send()
+res.render()
+res.json()
+res.redirect()
