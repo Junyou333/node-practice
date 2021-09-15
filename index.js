@@ -3,10 +3,12 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs').promises;
 const session = require('express-session');
+const MysqlStore = require('express-mysql-session')(session);
 const moment = require('moment-timezone');
 const upload = multer({ dest: 'tmp_uploads/' });
 const uploadImg = require('./modules/upload-image');
 const db = require('./modules/connect-mysql');
+const sessionStore = new MysqlStore({},db);
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     secret: 'gfddfhnjtrktykt75742hklug',
+    store:sessionStore,
     cookie: {
         maxAge: 1200000,
     }
