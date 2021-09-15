@@ -6,6 +6,7 @@ const session = require('express-session');
 const moment = require('moment-timezone');
 const upload = multer({ dest: 'tmp_uploads/' });
 const uploadImg = require('./modules/upload-image');
+const db = require('./modules/connect-mysql');
 
 const app = express();
 
@@ -121,6 +122,11 @@ app.get('/try-moment', (req, res) => {
     });
 });
 
+app.get('/try-db', async (req, res) => {
+    const [r] = await db.query("SELECT * FROM address_book WHERE `name` LIKE ?", ['%大%']);
+
+    res.json(r);
+});
 // *** 路由定義結束
 
 //需放在所有路由之後
