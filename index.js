@@ -33,11 +33,15 @@ app.use('/', express.static('public'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
-
+//自訂的middleware
 app.use((req, res, next) => {
     res.locals.title = '小新的網站';
 
+    //設定template的helper functions
+    res.locals.dateToDateString = d =>moment(d).format('YYYY-MM-DD');
+    res.locals.dateToDateTimeString = d =>moment(d).format('YYYY-MM-DD HH:mm:ss');
 
+ 
     next();
 });
 
