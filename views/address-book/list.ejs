@@ -65,7 +65,7 @@
                                         </td>
                                         <td>
                                             <a href="/address-book/edit/<%= i.sid %>">
-                                                <i class="fas fa-trash-alt"></i>
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -77,4 +77,11 @@
             </div>
         </div>
         <%- include('../parts/scripts.ejs') %>
+            <script>
+                function delete_it(sid) {
+                    if (confirm(`確定要刪除編號為${sid}的項目嗎`)) {
+                        location.href = '/address-book/delete/' + sid;
+                    }
+                }
+            </script>
             <%- include('../parts/html-foot.ejs') %>
