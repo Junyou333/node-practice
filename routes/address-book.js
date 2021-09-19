@@ -41,4 +41,12 @@ router.get('/list', async (req, res) => {
     // res.json(output);
     res.render('address-book/list', output);
 });
+
+router.delete('/delete/:sid([0-9]+)', async (req, res) => {
+    const sql = "DELETE FROM address_book WHERE sid=?";
+
+    const [r] = await db.query(sql, [req.params.sid]);
+    console.log({ r });
+    res.json(r);
+});
 module.exports = router;
