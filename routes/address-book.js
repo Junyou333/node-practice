@@ -49,4 +49,16 @@ router.delete('/delete/:sid([0-9]+)', async (req, res) => {
     console.log({ r });
     res.json(r);
 });
+
+router.route('/add')
+    .get(async (req, res) => {
+        res.locals.pageName = 'ab-add';
+        res.render('address-book/add');
+    })
+    .post(async (req, res) => {
+        res.json({});
+    });
+
+
+
 module.exports = router;

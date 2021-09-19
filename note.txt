@@ -11,3 +11,19 @@ res.send()
 res.render()
 res.json()
 res.redirect()
+
+
+
+RESTful API 作法:
+列表:
+    GET /product
+讀取單筆:
+    GET /product/:id
+新增:
+    POST /product
+修改:
+    PUT /product:id
+刪除:
+    DELETE /product/:id
+
+
