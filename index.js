@@ -8,7 +8,7 @@ const moment = require('moment-timezone');
 const upload = multer({ dest: 'tmp_uploads/' });
 const uploadImg = require('./modules/upload-image');
 const db = require('./modules/connect-mysql');
-const sessionStore = new MysqlStore({},db);
+const sessionStore = new MysqlStore({}, db);
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     secret: 'gfddfhnjtrktykt75742hklug',
-    store:sessionStore,
+    store: sessionStore,
     cookie: {
         maxAge: 1200000,
     }
@@ -36,12 +36,14 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 //自訂的middleware
 app.use((req, res, next) => {
     res.locals.title = '小新的網站';
+    res.locals.pageName = '';
+
 
     //設定template的helper functions
-    res.locals.dateToDateString = d =>moment(d).format('YYYY-MM-DD');
-    res.locals.dateToDateTimeString = d =>moment(d).format('YYYY-MM-DD HH:mm:ss');
+    res.locals.dateToDateString = d => moment(d).format('YYYY-MM-DD');
+    res.locals.dateToDateTimeString = d => moment(d).format('YYYY-MM-DD HH:mm:ss');
 
- 
+
     next();
 });
 
@@ -52,6 +54,7 @@ app.get('/', function (req, res) {
     //res.send('Hello World')
 });
 app.get('/json-sales', function (req, res) {
+    res.locals.pageName = 'json-sales';
     const sales = require('./data/sales');
 
     // console.log(sales);
